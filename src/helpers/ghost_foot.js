@@ -14,13 +14,7 @@ var handlebars = require('handlebars'),
 ghost_foot = function(options) {
   /*jshint unused:false*/
   var foot = []
-
-  // foot.push(
-  //   utils.scriptTemplate({
-  //     source: '//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js',
-  //     version: '',
-  //   }),
-  // )
+  
   foot.push(
     utils.scriptTemplate({
       source:
@@ -28,13 +22,6 @@ ghost_foot = function(options) {
       version: '',
     }),
   )
-  // foot.push(
-  //   utils.scriptTemplate({
-  //     source:
-  //       '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js',
-  //     version: '',
-  //   }),
-  // )
   foot.push(
     utils.scriptTemplate({
       source: '//cdnjs.cloudflare.com/ajax/libs/prism/1.14.0/prism.min.js',
@@ -45,14 +32,14 @@ ghost_foot = function(options) {
     `
       <script type="text/javascript">
         jQuery( document ).ready(function() {
-          // change date with ago
-          jQuery('ago.ago').each(function(){
-            var element = jQuery(this).parent();
-            element.html( moment(element.text()).fromNow());
+          $('time').each(function(){
+            var element = jQuery(this);
+            if (element.text().indexOf('ago')!==-1) {
+              element.html( moment(element.attr('datetime')).fromNow());
+            }
           });
         });
 
-        // hljs.initHighlightingOnLoad();
       </script>
       `,
   )
